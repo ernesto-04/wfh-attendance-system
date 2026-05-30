@@ -14,10 +14,7 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: [
-      'http://localhost:5173',
-      'https://wfh-attendance-system-nyvy02eor-ernesto-s-projects3.vercel.app',
-    ],
+    origin: true,
     credentials: true,
   });
 
