@@ -1,0 +1,48 @@
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+
+import { EmployeesService } from './employees.service';
+
+import { CreateEmployeeDto } from './dto/create-employee.dto';
+import { UpdateEmployeeDto } from './dto/update-employee.dto';
+
+import { JwtAuthGuard } from '../auth/jwt-auth/jwt-auth.guard';
+
+@Controller('employees')
+@UseGuards(JwtAuthGuard)
+export class EmployeesController {
+  constructor(private readonly employeesService: EmployeesService) {}
+
+  @Post()
+  create(@Body() createEmployeeDto: CreateEmployeeDto) {
+    return this.employeesService.create(createEmployeeDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.employeesService.findAll();
+  }
+
+  @Put(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+
+    @Body() updateEmployeeDto: UpdateEmployeeDto,
+  ) {
+    return this.employeesService.update(id, updateEmployeeDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.employeesService.remove(id);
+  }
+}
