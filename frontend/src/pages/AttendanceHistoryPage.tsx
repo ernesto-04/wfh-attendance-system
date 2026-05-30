@@ -21,6 +21,8 @@ function AttendanceHistoryPage() {
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const fetchAttendances = async () => {
     try {
       const endpoint = user.role === "ADMIN" ? "/attendance" : "/attendance/my";
@@ -93,7 +95,7 @@ function AttendanceHistoryPage() {
 
                     <td className="border px-4 py-2">
                       <img
-                        src={`http://localhost:3000/uploads/${attendance.photoPath}`}
+                        src={`${API_URL}/uploads/${attendance.photoPath}`}
                         alt="Attendance"
                         className="w-24 h-24 object-cover rounded"
                       />

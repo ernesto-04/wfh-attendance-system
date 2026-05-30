@@ -13,7 +13,10 @@ async function bootstrap() {
     }),
   );
 
-  app.enableCors();
+  app.enableCors({
+    origin: ['http://localhost:5173', 'https://your-app.vercel.app'],
+    credentials: true,
+  });
 
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/uploads/',
