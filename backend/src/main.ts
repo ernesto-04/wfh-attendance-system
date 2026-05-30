@@ -14,7 +14,10 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: true,
+    origin: [
+      'http://localhost:5173',
+      'https://wfh-attendance-system-eight.vercel.app',
+    ],
     credentials: true,
   });
 
